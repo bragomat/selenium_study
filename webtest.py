@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome("driver\chromedriver.exe")
 driver.get("https://music.yandex.ru/")
 #login_button = driver.find_element_by_xpath("/html/body/div[1]/div[5]/div/div[2]/a")
 #login_button.click()
