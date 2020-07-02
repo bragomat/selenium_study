@@ -12,6 +12,11 @@ try:
     password.send_keys("fake_pass")
     submit = driver.find_element_by_id("updateCT")
     submit.click()
+    time.sleep(2)
+
+    alert = driver.switch_to.alert
+    alert.accept()
+
 
     select = Select(driver.find_element_by_id("ctScripts"))
     check = select.first_selected_option.text
