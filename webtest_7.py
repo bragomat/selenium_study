@@ -22,20 +22,13 @@ try:
 
     WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, 'ctAgents')))
 
-    agent = Select(driver.find_element_by_id("ctAgents"))
-    agent.select_by_value("CerediraTess")
-    request_button = driver.find_element_by_id("executeCTRequest")
-    request_button.click()
+    agents = driver.find_elements(By.XPATH, '//*[@id="ctAgents"]/option[not(@disabled)]')
 
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".table-bordered")))
+    assert len(agents) > 0, "Check available agents"
 
-    request_history = driver.find_elements(By.CSS_SELECTOR, "div.card")
-    assert len(request_history) == 1, "Request history check"
+    ct_agent = driver.find_elements(By.XPATH, '//*[@id="ctAgents"]/option[@value="CerediraTess"]')
 
-    check = driver.find_element_by_css_selector("td textarea").get_attribute("value")
-    message = "Active code page: 65001\nasdf\nasdf\nasdf\nECHO is off.\n"
-
-    assert check == message, "Request completion check"
+    assert ct_agent, "Check CerediraTess-agent is available"
 
 finally:
     time.sleep(2)

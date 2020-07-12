@@ -20,22 +20,10 @@ try:
     select = Select(driver.find_element_by_id("ctScripts"))
     select.select_by_value("test.bat")
 
-    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, 'ctAgents')))
-
-    agent = Select(driver.find_element_by_id("ctAgents"))
-    agent.select_by_value("CerediraTess")
     request_button = driver.find_element_by_id("executeCTRequest")
     request_button.click()
 
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".table-bordered")))
-
-    request_history = driver.find_elements(By.CSS_SELECTOR, "div.card")
-    assert len(request_history) == 1, "Request history check"
-
-    check = driver.find_element_by_css_selector("td textarea").get_attribute("value")
-    message = "Active code page: 65001\nasdf\nasdf\nasdf\nECHO is off.\n"
-
-    assert check == message, "Request completion check"
+    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".modal-footer button")))
 
 finally:
     time.sleep(2)

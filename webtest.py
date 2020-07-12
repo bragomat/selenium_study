@@ -5,6 +5,7 @@ import time
 try:
     driver = webdriver.Chrome("driver\chromedriver.exe")
     driver.get("http://127.0.0.1:4444/CerediraTess.html")
+    driver.maximize_window()
 
     username = driver.find_element_by_id("username")
     username.send_keys("usr_1")
@@ -19,5 +20,5 @@ try:
     assert check == "Выберите скрипт для выполнения", "Authorisation check"
 
 finally:
-    time.sleep(10)
+    time.sleep(2)
     driver.quit()

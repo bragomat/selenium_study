@@ -29,13 +29,15 @@ try:
 
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".table-bordered")))
 
+    request_button.click()
     request_history = driver.find_elements(By.CSS_SELECTOR, "div.card")
-    assert len(request_history) == 1, "Request history check"
 
-    check = driver.find_element_by_css_selector("td textarea").get_attribute("value")
-    message = "Active code page: 65001\nasdf\nasdf\nasdf\nECHO is off.\n"
+    delete_button = driver.find_element(By.CSS_SELECTOR, ".btn-danger")
+    delete_button.click()
+    request_history_new = driver.find_elements(By.CSS_SELECTOR, "div.card")
+    check = len(request_history) - len(request_history_new)
 
-    assert check == message, "Request completion check"
+    assert check == 1, "Deleting request history check"
 
 finally:
     time.sleep(2)
