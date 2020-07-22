@@ -6,13 +6,13 @@ import time
 @pytest.fixture()
 def browser():
     browser = webdriver.Chrome("driver/chromedriver.exe")
-    browser.get("http://127.0.0.1:4444/CerediraTess.html")
     browser.maximize_window()
     yield browser
     time.sleep(2)
     browser.quit()
 
 def test_auth(browser):
+    browser.get("http://127.0.0.1:4444/CerediraTess.html")
     username = browser.find_element_by_id("username")
     username.send_keys("usr_1")
     password = browser.find_element_by_id("password")
