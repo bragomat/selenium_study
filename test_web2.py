@@ -1,21 +1,9 @@
-from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pytest
-import time
 
-@pytest.fixture()
-def browser():
-    global driver
-    driver = webdriver.Chrome("driver/chromedriver.exe")
-    driver.get("http://127.0.0.1:4444/CerediraTess.html")
-    driver.maximize_window()
-    yield
-    time.sleep(2)
-    driver.quit()
 
-def test_authfail(browser):
+def test_authfail(driver):
     username = driver.find_element_by_id("username")
     username.send_keys("fake_user")
     password = driver.find_element_by_id("password")
